@@ -1,10 +1,9 @@
-celery_with_redis_lock
-=====================
+# celery_with_redis_lock
 
 Experimenting with Redis.lock under Celery
 
-Usage
------
+## Usage
+
 Install dependencies:
 ```bash
 pip install tox celery
@@ -20,12 +19,8 @@ Run tests:
 tox -r
 ```
 
-Licence
--------
-
+## Licence
 http://www.wtfpl.net/txt/copying/
 
-Authors
--------
-
+## Authors
 `celery_with_redis_lock` was written by `Mateusz Pro. <mateusz.probachta@gmail.com>`_.
