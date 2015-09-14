@@ -9,8 +9,8 @@ Install dependencies:
     pip install tox celery
 
 Run celery:
-    celery -A celery_with_redis_lock worker --concurrency=4 --loglevel=info \
-    -n celery_with_redis_lock.%h
+    celery -A celery_with_redis_lock worker --concurrency=4 --loglevel=info \\
+       -n celery_with_redis_lock.%h
 
 Run tests:
     tox -r
