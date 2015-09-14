@@ -5,6 +5,8 @@ Experimenting with Redis.lock under Celery
 
 Usage
 -----
+Install dependencies:
+    pip install tox celery
 
 Run celery:
     celery -A celery_many_producers worker --concurrency=4 --loglevel=info -n celery_many_producers.%h
