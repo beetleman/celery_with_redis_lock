@@ -1,0 +1,18 @@
+from multiprocessing import Pool
+from itertools import repeat
+import time
+
+from celery_many_producers.tasks import add_to_list
+from celery_many_producers.app import get_list
+
+
+def run_add_to_list(x):
+    add_to_list.delay(x)
+
+
+def test_add_to_list(drop_list):
+    test_data = list(repeat(1, 10))
+    with Pool(3) as p:
+        p.map(run_add_to_list, test_data)
+    time.sleep(5)
+    assert [1] == sorted(map(int, get_list()))
