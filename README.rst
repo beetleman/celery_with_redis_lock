@@ -6,14 +6,19 @@ Experimenting with Redis.lock under Celery
 Usage
 -----
 Install dependencies:
-    pip install tox celery
+```bash
+pip install tox celery
+```
 
 Run celery:
-    celery -A celery_with_redis_lock worker --concurrency=4 --loglevel=info \\
-       -n celery_with_redis_lock.%h
+```bash
+celery -A celery_with_redis_lock worker --concurrency=4 --loglevel=info -n celery_with_redis_lock.%h
+```
 
 Run tests:
-    tox -r
+```bash
+tox -r
+```
 
 Licence
 -------
