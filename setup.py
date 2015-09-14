@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="celery_many_producers",
+    name="celery_with_redis_lock",
     version="0.1.0",
     url="example.com",
 

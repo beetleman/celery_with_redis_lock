@@ -1,9 +1,9 @@
 from celery import Celery
 
-app = Celery('celery_many_producers',
+app = Celery('celery_with_redis_lock',
              broker='amqp://guest@localhost//',
              backend='redis://localhost',
-             include=['celery_many_producers.tasks'])
+             include=['celery_with_redis_lock.tasks'])
 
 # Optional configuration, see the application user guide.
 app.conf.update(

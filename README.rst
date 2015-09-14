@@ -1,4 +1,4 @@
-celery_many_producers
+celery_with_redis_lock
 =====================
 
 Experimenting with Redis.lock under Celery
@@ -9,7 +9,8 @@ Install dependencies:
     pip install tox celery
 
 Run celery:
-    celery -A celery_many_producers worker --concurrency=4 --loglevel=info -n celery_many_producers.%h
+    celery -A celery_with_redis_lock worker --concurrency=4 --loglevel=info \
+    -n celery_with_redis_lock.%h
 
 Run tests:
     tox -r
@@ -22,4 +23,4 @@ http://www.wtfpl.net/txt/copying/
 Authors
 -------
 
-`celery_many_producers` was written by `Mateusz Pro. <mateusz.probachta@gmail.com>`_.
+`celery_with_redis_lock` was written by `Mateusz Pro. <mateusz.probachta@gmail.com>`_.

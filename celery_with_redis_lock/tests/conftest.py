@@ -1,5 +1,5 @@
 import pytest
-from celery_many_producers.app import LIST_NAME, get_storage
+from celery_with_redis_lock.app import LIST_NAME, get_storage
 import time
 
 @pytest.fixture()

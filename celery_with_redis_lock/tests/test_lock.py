@@ -2,8 +2,8 @@ from multiprocessing import Pool
 from itertools import repeat
 import time
 
-from celery_many_producers.tasks import add_to_list
-from celery_many_producers.app import get_list
+from celery_with_redis_lock.tasks import add_to_list
+from celery_with_redis_lock.app import get_list
 
 
 def run_add_to_list(x):
