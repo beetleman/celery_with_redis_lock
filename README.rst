@@ -1,22 +1,21 @@
 celery_many_producers
 =====================
 
-foo bar:D
+Experimenting with Redis.lock under Celery
 
 Usage
 -----
 
-Installation
-------------
+Run celery:
+    celery -A celery_many_producers worker --concurrency=4 --loglevel=info -n celery_many_producers.%h
 
-Requirements
-^^^^^^^^^^^^
-
-Compatibility
--------------
+Run tests:
+    tox -r
 
 Licence
 -------
+
+http://www.wtfpl.net/txt/copying/
 
 Authors
 -------
