@@ -1,5 +1,8 @@
 import setuptools
 
+with open('README.md') as readme_file:
+    README = readme_file.read().strip()
+
 setuptools.setup(
     name="celery_with_redis_lock",
     version="0.1.0",
@@ -9,7 +12,7 @@ setuptools.setup(
     author_email="mateusz.probachta@gmail.com",
 
     description="testing",
-    long_description=open('README.rst').read(),
+    long_description=README,
 
     packages=setuptools.find_packages(),
 
