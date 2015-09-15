@@ -1,6 +1,7 @@
 import pytest
+
 from celery_with_redis_lock.app import LIST_NAME, get_storage
-import time
+
 
 @pytest.fixture()
 def drop_list(request):

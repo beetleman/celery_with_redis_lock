@@ -1,9 +1,10 @@
-import redis
-import time
 import logging
-from hashlib import md5
+import time
 from contextlib import contextmanager
 from functools import partial
+from hashlib import md5
+
+import redis
 
 LIST_NAME = 'turbo_lista'
 TIMEOUT = 30
