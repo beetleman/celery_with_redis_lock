@@ -7,7 +7,7 @@ from hashlib import md5
 import redis
 
 LIST_NAME = 'turbo_lista'
-TIMEOUT = 30
+TIMEOUT = 10
 
 REDIS_CLIENT = redis.StrictRedis()
 
