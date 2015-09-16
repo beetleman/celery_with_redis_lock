@@ -1,13 +1,8 @@
-import logging
 import time
-from contextlib import contextmanager
-from functools import partial
-from hashlib import md5
 
 import redis
 
 LIST_NAME = 'turbo_lista'
-TIMEOUT = 10
 
 REDIS_CLIENT = redis.StrictRedis()
 
@@ -26,26 +21,3 @@ def add_to_list(x):
 def get_list():
     r = get_storage()
     return r.lrange(LIST_NAME, 0, -1)
-
-
-@contextmanager
-def get_locked_function(func, release, *args):
-    args_hash = md5()
-    args_hash.update(b'.'.join(
-        map(lambda x: str(x).encode(), args)
-    ))
-    lock_key = args_hash.hexdigest()
-    lock = REDIS_CLIENT.lock(lock_key, timeout=TIMEOUT)
-    try:
-        have_lock = lock.acquire(blocking=False)
-        if have_lock:
-            logging.info("lock for %s" % lock_key)
-            logging.info("run: %s(*%s)" % (func.__name__, args))
-            yield partial(func, *args)
-        else:
-            logging.info("skip: %s(*%s)" % (func.__name__, args))
-            yield lambda: 'skiped'
-    finally:
-        if have_lock and release:
-            logging.info("release %s" % lock_key)
-            lock.release()
