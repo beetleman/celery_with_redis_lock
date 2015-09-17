@@ -4,7 +4,7 @@ import redis
 
 LIST_NAME = 'turbo_lista'
 
-REDIS_CLIENT = redis.StrictRedis()
+REDIS_CLIENT = redis.StrictRedis(db='10')
 
 
 def get_storage():
