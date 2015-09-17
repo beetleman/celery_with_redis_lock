@@ -22,7 +22,8 @@ def run_binded_add_to_list(x):
 
 test_data = (
     (list(repeat(1, 10)), [1]),
-    (list(repeat(2, 10)) + list(repeat(3, 10)) + list(repeat(4, 10)), [2, 3, 4]),
+    (list(repeat(2, 10)) + list(repeat(3, 10)) +
+     list(repeat(4, 10)), [2, 3, 4]),
 )
 test_function = (
     run_add_to_list,
