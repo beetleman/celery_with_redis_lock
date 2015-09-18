@@ -55,7 +55,8 @@ def test_add_to_list(drop_db, run_celery, list_name,
 
 
 @pytest.mark.parametrize("function", test_function)
-def test_add_to_list_many_locks_timeout(drop_db, run_celery, list_name,  function):
+def test_add_to_list_many_locks_timeout(drop_db, run_celery,
+                                        list_name,  function):
     test_data = list(repeat(5, 10)) + list(repeat(6, 10)) + list(repeat(7, 10))
     run_in_pool(function, add_args(test_data, list_name), sleep=TIMEOUT)
     run_in_pool(function, add_args(test_data, list_name))

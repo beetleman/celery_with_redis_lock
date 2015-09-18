@@ -37,7 +37,7 @@ def drop_db(request):
 
 @pytest.fixture()
 def list_name():
-    return  next(list_names)
+    return next(list_names)
 
 
 @pytest.fixture(scope='session')
