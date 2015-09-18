@@ -1,18 +1,14 @@
 # celery_with_redis_lock
 
-Experimenting with Redis.lock under Celery
+Experimenting with Redis.lock and Celery
 
 ## Usage
 
-Install dependencies:
+Install python dependencies:
 ```bash
-pip install tox celery
+pip install tox
 ```
-
-Run celery:
-```bash
-celery -A celery_with_redis_lock worker --concurrency=4 --loglevel=info -n celery_with_redis_lock.%h
-```
+and instakll redis and rabbitmq via apt-get, yum, dnf...
 
 Run tests:
 ```bash
