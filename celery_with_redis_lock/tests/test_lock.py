@@ -4,20 +4,35 @@ from multiprocessing import Pool
 
 import pytest
 
-from celery_with_redis_lock.app import get_list
-from celery_with_redis_lock.tasks import (
+from example_app.app import get_list
+from example_app.tasks import (
     add_to_list,
     binded_add_to_list,
     TIMEOUT
 )
 
 
-def run_add_to_list(x):
-    add_to_list.delay(x)
+def run_add_to_list(args):
+    r = add_to_list.delay(*args)
+    r.wait()
 
 
-def run_binded_add_to_list(x):
-    binded_add_to_list.delay(x)
+def run_in_pool(func, data, sleep=0):
+    with Pool(len(data)) as p:  # race condition simulation
+        p.map(func, data)
+    time.sleep(sleep)
+
+
+def run_binded_add_to_list(args):
+    r = binded_add_to_list.delay(*args)
+    r.wait()
+
+
+def add_args(data, *args):
+    return list(
+        map(lambda x: [x[0]] + list(x[1]),
+            zip(data, repeat(args)))
+    )
 
 
 test_data = (
@@ -31,22 +46,17 @@ test_function = (
 )
 
 
-def run_in_pool(func, data, sleep=10):
-    with Pool(3) as p:
-        p.map(func, data)
-    time.sleep(sleep)
-
-
 @pytest.mark.parametrize("function", test_function)
 @pytest.mark.parametrize("tested,expected", test_data)
-def test_add_to_list(drop_db, tested, expected, function):
-    run_in_pool(function, tested)
-    assert expected == sorted(map(int, get_list()))
+def test_add_to_list(drop_db, run_celery, list_name,
+                     tested, expected, function):
+    run_in_pool(function, add_args(tested, list_name))
+    assert expected == sorted(map(int, get_list(list_name)))
 
 
 @pytest.mark.parametrize("function", test_function)
-def test_add_to_list_many_locks_timeout(drop_db, function):
+def test_add_to_list_many_locks_timeout(drop_db, run_celery, list_name,  function):
     test_data = list(repeat(5, 10)) + list(repeat(6, 10)) + list(repeat(7, 10))
-    run_in_pool(function, test_data, sleep=2 * TIMEOUT)
-    run_in_pool(function, test_data)
-    assert [5, 5, 6, 6, 7, 7] == sorted(map(int, get_list()))
+    run_in_pool(function, add_args(test_data, list_name), sleep=TIMEOUT)
+    run_in_pool(function, add_args(test_data, list_name))
+    assert [5, 5, 6, 6, 7, 7] == sorted(map(int, get_list(list_name)))

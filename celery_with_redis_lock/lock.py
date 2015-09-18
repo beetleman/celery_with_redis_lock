@@ -72,6 +72,7 @@ class lock_decorator(object):
                 have_lock = lock.acquire(blocking=False)
                 if have_lock:
                     logging.info("lock for %s" % lock_key)
+                    logging.info("lock for %s" % lock_key)
                     logging.info("run: %s(*%s)" % (func.__name__, args))
                     func(*args)
                 else:
