@@ -10,7 +10,7 @@ from example_app.app import get_storage
 from example_app.tasks import TIMEOUT
 
 CELERY_CMD = 'celery -A example_app worker --concurrency=4 ' \
-             '--loglevel=debug -n example_app.%h'
+             '--loglevel=debug -f celery.log -n example_app.%h'
 
 
 def name_generator(prefix):
