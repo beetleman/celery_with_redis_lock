@@ -17,15 +17,15 @@ def run_add_to_list(args):
     r.wait()
 
 
+def run_binded_add_to_list(args):
+    r = binded_add_to_list.delay(*args)
+    r.wait()
+
+
 def run_in_pool(func, data, sleep=0):
     with Pool(len(data)) as p:  # race condition simulation
         p.map(func, data)
     time.sleep(sleep)
-
-
-def run_binded_add_to_list(args):
-    r = binded_add_to_list.delay(*args)
-    r.wait()
 
 
 def add_args(data, *args):
