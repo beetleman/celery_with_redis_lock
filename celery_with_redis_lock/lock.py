@@ -71,15 +71,15 @@ class lock_decorator(object):
             try:
                 have_lock = lock.acquire(blocking=False)
                 if have_lock:
-                    logging.info("lock for %s" % lock_key)
-                    logging.info("lock for %s" % lock_key)
-                    logging.info("run: %s(*%s)" % (func.__name__, args))
+                    logging.debug("lock for %s" % lock_key)
+                    logging.debug("lock for %s" % lock_key)
+                    logging.debug("run: %s(*%s)" % (func.__name__, args))
                     func(*args)
                 else:
-                    logging.info("skip: %s(*%s)" % (func.__name__, args))
+                    logging.debug("skip: %s(*%s)" % (func.__name__, args))
             finally:
                 if have_lock and decorator.release:
-                    logging.info("release %s" % lock_key)
+                    logging.debug("release %s" % lock_key)
                     lock.release()
         return wrapper
 
