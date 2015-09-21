@@ -8,6 +8,7 @@ from example_app.app import get_list
 from example_app.tasks import (
     add_to_list,
     binded_add_to_list,
+    add_to_list_base_class,
     TIMEOUT
 )
 
@@ -19,6 +20,11 @@ def run_add_to_list(args):
 
 def run_binded_add_to_list(args):
     r = binded_add_to_list.delay(*args)
+    r.wait()
+
+
+def run_add_to_list_base_class(args):
+    r = add_to_list_base_class.delay(*args)
     r.wait()
 
 
@@ -43,6 +49,7 @@ test_data = (
 test_function = (
     run_add_to_list,
     run_binded_add_to_list,
+    run_add_to_list_base_class,
 )
 
 
