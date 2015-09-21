@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from celery_with_redis_lock.lock import lock_decorator
 from celery import Task
 
@@ -26,7 +28,7 @@ class TaskWithLock(Task):
             **self.lock_kwargs
         )
         self.run = decorator(self.run)
-        super(*args, **kwargs)
+        super(TaskWithLock, self).__init__(*args, **kwargs)
 
     def get_lock_decorator(self, release=True, timeout=None, redis_client=None,
                            **lock_kwargs):

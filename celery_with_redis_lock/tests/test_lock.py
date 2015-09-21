@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import time
 from itertools import repeat
 from multiprocessing import Pool
@@ -29,8 +31,8 @@ def run_add_to_list_base_class(args):
 
 
 def run_in_pool(func, data, sleep=0):
-    with Pool(len(data)) as p:  # race condition simulation
-        p.map(func, data)
+    p = Pool(len(data))  # race condition simulation
+    p.map(func, data)
     time.sleep(sleep)
 
 

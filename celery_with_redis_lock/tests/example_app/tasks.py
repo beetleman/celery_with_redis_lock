@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from celery_with_redis_lock.lock import lock_decorator, binded_lock_decorator
 from celery_with_redis_lock.tasks import TaskWithLock
 
